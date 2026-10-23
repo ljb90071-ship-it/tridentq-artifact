@@ -1,0 +1,30 @@
+The generic stream constructs legal prefixes directly. Let $n$ be the number of mutable pending fragments in the merged order. Split this task
+order into four consecutive bands of width $\lceil n/4\rceil$, allowing empty
+last bands. Lengths one through $\min(k,n)$ receive proposal turns in round-robin
+order. Each length maintains its own anchor cycle over tasks with no pending
+mutable predecessor. Within each band these anchors are shuffled, and the
+cycle repeatedly visits bands $(0,1,0,2,0,3)$, taking one unused anchor whenever
+that band is nonempty. Exhausted bands are skipped. After every eligible anchor
+has appeared once, a new cycle is shuffled. This favors high ranks early while
+preventing a length's initial proposals from repeatedly using only the first
+few tasks. Running and age-protected predecessors remain fixed boundary events.
+
+An anchor is the first member of a prefix. Each subsequent member is selected
+only from unselected tasks whose mutable pending predecessors already occur in the
+prefix. Among nonempty eligible bands, selection probabilities are proportional
+to $(3,1,1,1)$; a task is chosen uniformly within the selected band. Consequently
+every emitted task tuple is distinct-member, topological, and ancestor closed.
+For each member, choose its locally fastest supported device with probability
+$1/2$ and otherwise choose uniformly among all its supported devices. The
+device list uses predicted finish and then identifier order. This favors local
+placements while giving every supported assignment positive probability;
+task sets are not held fixed while a device Cartesian product is exhausted.
+The stream uses no copy groups, release frontiers, or blocked beneficiaries.
+
+Sampling uses a fixed master seed (20261011), with per-epoch streams derived from the trace and epoch identifiers. Matched snapshots use identical generic random streams, separate from workload randomness. The source package specifies the exact seed and draw convention.
+This is a diversified sampler, not an exhaustive enumeration guarantee within
+a deadline. Duplicate proposals and unsuccessful source resolution consume
+proposal slots. Eligibility maintenance, shuffles, device selection, and
+deduplication are timed; no full neighborhood is materialized. A direct
+implementation scans eligible tasks for at most $k$ selections and updates
+their predecessor counts, costing $O(kn+e)$ per proposal in the worst case.

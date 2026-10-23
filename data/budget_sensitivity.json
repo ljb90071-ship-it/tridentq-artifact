@@ -1,0 +1,19 @@
+{
+  "Cover-256": [
+    {
+      "deadline_ms": 2,
+      "mean_s": 3.89,
+      "one_core_cpu_percent": 3.9
+    },
+    {
+      "deadline_ms": 10,
+      "mean_s": 3.79,
+      "one_core_cpu_percent": 6.8
+    }
+  ],
+  "default_TridentQ_mean_s": 3.82,
+  "low_rate_mean_s": {
+    "TridentQ": 1.47,
+    "Cover-64": 1.46
+  }
+}

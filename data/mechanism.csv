@@ -1,0 +1,7 @@
+policy,blocked_lane_percent,dma_GiB_per_query,retained_GiB_s_per_query
+HEFTM-Q,17.6,9,70.2
+Locality-Q,15.2,7.6,64.1
+DARTS-Q,12.4,7.9,54.6
+Release-Greedy,13.8,9.8,58.2
+Cover-64,7.2,9.1,42.3
+TridentQ,5.9,9.4,38.8

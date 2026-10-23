@@ -1,0 +1,5 @@
+policy,evaluation_cap,all_hits,all_states,improvable_hits,improvable_states,noop_optimal_states
+Cover,64,177,240,153,216,24
+TridentQ,64,190,240,166,216,24
+Cover,256,207,240,183,216,24
+TridentQ,256,211,240,187,216,24

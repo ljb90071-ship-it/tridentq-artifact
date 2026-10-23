@@ -1,0 +1,94 @@
+{
+  "hardware": {
+    "CPU": "2 x AMD EPYC 7543, 32 cores each",
+    "host_GiB": 512,
+    "GPU": "2 x NVIDIA A10, 24 GB each",
+    "H2D_GB_per_s": 22,
+    "D2H_GB_per_s": 24,
+    "GPU_to_GPU": "host-staged, both legs charged",
+    "CPU_slots": 8,
+    "cores_per_slot": 8,
+    "compute_lanes_per_GPU": 1
+  },
+  "memory": {
+    "default_GPU_pool_GiB": 16,
+    "host_pool_GiB": 256,
+    "partition_bound_GiB": 2,
+    "spill_tile_MiB": 64
+  },
+  "traces": {
+    "per_family": 10,
+    "measurement_s": 1200,
+    "warmup_s": 120,
+    "max_admitted": 32,
+    "interval_s": 60,
+    "alternating_rate_multipliers": [
+      0.5,
+      1.5
+    ],
+    "interarrival": "exponential",
+    "H-Mix": {
+      "templates": 22,
+      "scale_factor": 100,
+      "rate_qps": 1.8
+    },
+    "DS-Mix": {
+      "templates": 99,
+      "scale_factor": 100,
+      "rate_qps": 1.2
+    },
+    "Branch-Mix": {
+      "templates": 24,
+      "fanouts": [
+        2,
+        4,
+        8
+      ],
+      "equal_fanout_mass": true,
+      "rate_qps": 2.4
+    }
+  },
+  "aggregation": {
+    "mean": "arithmetic mean of ten trace means",
+    "p95": "arithmetic mean of ten trace p95 values",
+    "drain": "stop arrivals at 1200; admit and complete all cohort IDs including externally queued queries",
+    "cohort": "query IDs arriving in [0,1200), shared across policies",
+    "warmup": "arrivals in [-120,0) excluded from cohort; residual work retained",
+    "exclusions": "zero cohort queries excluded for cutoff waiting",
+    "mechanism_interval": "[0,last cohort completion], including warmup residual interference",
+    "per_query_denominator": "completed measurement cohort count"
+  },
+  "search": {
+    "k": 3,
+    "pool": 32,
+    "initial_proposal_slots": 32,
+    "refill_slots": 4,
+    "replay_cap": 64,
+    "deadline_ms": 2,
+    "frontier_beam": 16,
+    "frontier_slot_fraction": 0.5,
+    "master_seed": 20261011,
+    "age_threshold_isolated_runtime_multiplier": 20
+  },
+  "oracle": {
+    "collector": "Transfer-EFT",
+    "states_per_family": 80,
+    "window_s": 60,
+    "rule": "first eligible blocked event per window",
+    "pending_mutable_max": 12,
+    "common_state_and_incumbent": true,
+    "selection_frozen_before_search": true
+  },
+  "prediction_noise": {
+    "distribution": "log Z = -sigma^2/2 + sigma*N(0,1)",
+    "sigma": [
+      0,
+      0.2,
+      0.4
+    ],
+    "key": "20261023:prediction:trace_id:kernel_id:device_id",
+    "seed": "first 8 SHA256 bytes, big endian",
+    "normal_draw": "Python Random(seed).normalvariate(0,1)",
+    "sharing": "one keyed normal per trace/kernel/device across policies and sigma levels"
+  }
+}

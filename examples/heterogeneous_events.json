@@ -1,0 +1,13 @@
+{
+  "capacity_GiB": {"GPU0": 10, "GPU1": 10, "host": 256},
+  "initial_GiB": {"GPU0": 6, "GPU1": 0, "host": 0},
+  "queries": {"A": {"terminal": ["a"]}, "B": {"terminal": ["b"]}, "R": {"terminal": ["r", "cpu"]}},
+  "operations": [
+    {"id": "cpu", "duration_s": 10, "parents": [], "lane": "CPU0"},
+    {"id": "d2h", "duration_s": 0.3, "parents": [], "lane": "D2H0", "acquire_GiB": {"host": 6, "GPU1": 6}},
+    {"id": "h2d", "duration_s": 0.3, "parents": ["d2h"], "lane": "H2D1", "release_GiB": {"host": 6, "GPU0": 6}},
+    {"id": "r", "duration_s": 1, "parents": ["h2d"], "lane": "GPU1", "release_GiB": {"GPU1": 6}},
+    {"id": "b", "duration_s": 1, "parents": ["h2d"], "lane": "GPU0", "acquire_GiB": {"GPU0": 6}, "release_GiB": {"GPU0": 6}},
+    {"id": "a", "duration_s": 4, "parents": ["b"], "lane": "GPU0", "acquire_GiB": {"GPU0": 2}, "release_GiB": {"GPU0": 2}}
+  ]
+}

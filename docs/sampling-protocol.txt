@@ -1,0 +1,9 @@
+Exact generic random-stream convention.
+Sampling uses MT19937 with the seed-to-draw convention of Python's \texttt{Random(seed).random()} and master seed 20261011. The epoch seed is the first
+four bytes, interpreted big-endian, of SHA-256 over the UTF-8 string
+\texttt{20261011:trace\_id:epoch\_id}. Frozen matched snapshots use the same
+generic seed and draw sequence, independently of workload randomness.
+Stable identifier order precedes each Fisher--Yates shuffle or uniform draw;
+a uniform index in a list of size $m$ is $\lfloor um\rfloor$ for the next
+$u\in[0,1)$. After anchor construction, subsequent tasks are sampled in prefix
+order, followed by device draws in that same order.

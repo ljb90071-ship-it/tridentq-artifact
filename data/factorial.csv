@@ -1,0 +1,6 @@
+source,scoring,mean_s
+Generic,Immediate,5.5
+Frontier portfolio,Immediate,5.3
+Generic,Exact replay,4.08
+Frontier portfolio,Exact replay,3.82
+Frontier portfolio,Immediate time-only,5.16

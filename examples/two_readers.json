@@ -1,0 +1,12 @@
+{
+  "capacity_GiB": 10,
+  "copies": [{"id": "X", "size_GiB": 6, "readers": ["r1", "r2"]}],
+  "tasks": [
+    {"id": "other", "query": "O", "duration_s": 7, "scratch_GiB": 2},
+    {"id": "r1", "query": "R", "duration_s": 1, "scratch_GiB": 0},
+    {"id": "r2", "query": "R", "duration_s": 1, "scratch_GiB": 0},
+    {"id": "b", "query": "B", "duration_s": 1, "scratch_GiB": 6}
+  ],
+  "queries": {"O": {}, "R": {"fixed_tail_s": 12}, "B": {}},
+  "incumbent": ["other", "r1", "r2", "b"], "beneficiary": "b", "k": 3
+}

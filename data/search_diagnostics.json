@@ -1,0 +1,59 @@
+{
+  "untargeted_groups": {
+    "mean_s": 3.99,
+    "TridentQ_mean_s": 3.82
+  },
+  "planning": {
+    "Cover-64": {
+      "completed_median": 64,
+      "completed_p10": 45,
+      "usable_incumbent_timeout_percent": 0.3,
+      "unscored_fallback_percent": 0.1
+    },
+    "TridentQ": {
+      "completed_median": 64,
+      "completed_p10": 40,
+      "usable_incumbent_timeout_percent": 0.4,
+      "unscored_fallback_percent": 0.1
+    }
+  },
+  "epoch_state": {
+    "H-Mix": {
+      "fragments_median_p95": [
+        78,
+        240
+      ],
+      "edges_median_p95": [
+        166,
+        556
+      ],
+      "closure_fit_percent": 31
+    },
+    "DS-Mix": {
+      "fragments_median_p95": [
+        114,
+        352
+      ],
+      "edges_median_p95": [
+        260,
+        862
+      ],
+      "closure_fit_percent": 39
+    },
+    "Branch-Mix": {
+      "fragments_median_p95": [
+        96,
+        288
+      ],
+      "edges_median_p95": [
+        224,
+        736
+      ],
+      "closure_fit_percent": 57
+    }
+  },
+  "copy_size": {
+    "median_MiB": 128,
+    "p95_GiB": 1.5
+  }
+}

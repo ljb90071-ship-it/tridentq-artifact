@@ -1,0 +1,29 @@
+{
+  "device_change_percent": {
+    "same_placement": 61,
+    "CPU_move": 27,
+    "GPU_move": 12
+  },
+  "release_group_percent": {
+    "one_copy": 72,
+    "multiple_or_cancel_allocation": 28
+  },
+  "denominator": "accepted frontier continuations across ten Branch-Mix traces",
+  "count": 10000,
+  "unit": "one epoch whose final selected continuation is a frontier proposal",
+  "device_classification_priority": [
+    "any CPU move",
+    "otherwise any GPU-to-GPU move",
+    "otherwise unchanged"
+  ],
+  "release_classification": "predicted allocation changes of the accepted continuation, not completed releases",
+  "device_change_counts": {
+    "same_placement": 6100,
+    "CPU_move_including_mixed": 2700,
+    "GPU_move_only": 1200
+  },
+  "release_group_counts": {
+    "one_copy": 7200,
+    "multiple_or_cancel_allocation": 2800
+  }
+}
